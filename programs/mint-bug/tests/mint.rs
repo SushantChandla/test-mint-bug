@@ -1,4 +1,3 @@
-// #![cfg(feature = "test-bpf")]
 
 use anchor_lang::prelude::Pubkey;
 use anchor_spl::token::TokenAccount;
@@ -89,6 +88,14 @@ async fn mint_test() {
         mint_amount,
     )
     .await;
+    mint_base_tokens(
+        &mut context,
+        mint.pubkey(),
+        &authority,
+        user_associated_token_account,
+        mint_amount,
+    )
+    .await;
 
     let token_account: TokenAccount = context
         .banks_client
@@ -97,5 +104,9 @@ async fn mint_test() {
         .unwrap();
 
     // THis is mint_amount
-    println!("balance {}", token_account.amount);
+    // println!("balance {}", token_account.amount);
+    assert_eq!(
+        token_account.amount,
+        mint_amount + mint_amount + mint_amount
+    )
 }

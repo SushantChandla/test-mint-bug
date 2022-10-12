@@ -1910,7 +1910,6 @@ dependencies = [
  "anchor-spl",
  "solana-sdk",
  "solana-test-framework",
- "spl-associated-token-account",
 ]
 
 [[package]]
